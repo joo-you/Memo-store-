@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>malak</title>
+    <!-- ربط خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------
+           1. المتغيرات والإعدادات العامة (CSS Variables)
+        ------------------------------------------------- */
+        :root {
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --whatsapp-color: #25d366;
+            --whatsapp-hover: #1ebd58;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* الخلفية العصرية الجديدة (Gradient Mesh الخلفية المتدرجة الأنيقة) */
+        body {
+            background-color: hwb(0 7% 80%);
+
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.04) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* -------------------------------------------------
+           2. شريط التنقل العلوي (Header)
+        ------------------------------------------------- */
+        .main-header {
+            background: rgba(230, 172, 14, 0.8509803921568627);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(102, 168, 232, 0.8);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: hwb(304 6% 48%);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: hwb(304 2% 53%);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            color: #ffffff !important;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+        }
+
+        .nav-btn-whatsapp:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+        }
+
+        /* -------------------------------------------------
+           3. القسم الترحيبي (Hero Section)
+        ------------------------------------------------- */
+        .hero-section {
+            text-align: center;
+            padding: 80px 0 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: hwb(0 100% 0%);
+        }
+
+        .hero-section p {
+            font-size: 30px;
+            color: white;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+      p2{
+        color:white;
+        font-size:20px;
+      }
+      
+
+        /* -------------------------------------------------
+           4. قسم معرض الأعمال (Portfolio Grid)
+        ------------------------------------------------- */
+        .portfolio-section {
+            padding: 40px 0 80px;
+        }
+
+        .portfolio-grid {
+            display: relative;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* -------------------------------------------------
+           5. قسم التواصل عبر الواتساب (Contact Section)
+        ------------------------------------------------- */
+        .contact-section {
+            background: rgba(136, 16, 90, 0.7372549019607844);
+            backdrop-filter: blur(10px);
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .contact-box {
+            max-width: 600px;            
+           margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-box h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .whatsapp-main-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: var(--whatsapp-color);
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-main-btn:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-main-btn svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+      /* زر الفيسبوك */
+.facebook-main-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #1877f2; /* لون الفيسبوك الأزرق */
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(24, 119, 242, 0.2);
+}
+
+.facebook-main-btn:hover {
+    background-color: #166fe5;
+    transform: translateY(-2px);
+}
+
+.facebook-main-btn svg {
+    fill: #fff;
+    width: 22px;
+    height: 22px;
+}
+/* زر إنستجرام بتدرج الألوان الرسمي */
+.instagram-main-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(220, 39, 67, 0.2);
+}
+
+.instagram-main-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.instagram-main-btn svg {
+    fill: #fff;
+    width: 22px;
+    height: 22px;
+}
+
+/* حاوية لتنظيم الأزرار جنب بعض */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+      
+
+
+        /* -------------------------------------------------
+           6. الفوتر (Footer)
+        ------------------------------------------------- */
+        footer {
+            background-color: #0e389a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+        }
+
+        /* التجاوب مع الشاشات الصغيرة (Responsive) */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .nav-links a:not(.nav-btn-whatsapp) { display: none; }
+            .contact-box { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. شريط التنقل العلوي -->
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><span>
+              MEMO STORE
+            </span></h1>
+            <nav class="nav-links">
+                <a href="#portfolio">الأعمال</a>
+                <a href="#contact" class="nav-btn-whatsapp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326z"/></svg>
+                  تواصل معايا
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 2. القسم الترحيبي -->
+    <section class="hero-section">
+        <div class="container">
+            <p>طالما انت دخلت هنا يبقا انت في المكان الصح </p>
+       <br>
+          <br>
+          <p2> MY NAME IS MALAK ELSAADNY & MY PARTHNER MY SISTER MENNA
+
+        
+          </p2>
+        </div>
+    </section>
+
+    <!-- 3. قسم معرض الأعمال -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <div class="portfolio-grid">
+
+                <!-- المشروع الأول -->
+                <div class="portfolio-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://cdn.almatjar.org/dokantiba3a/media/1469/mg-mtboaa-bgmlh-kl-alhkay-shoy-mghod.jpg" alt="مشروع 1">
+                    </div>
+                    <div class="card-content">
+                        <h3>مج مطبوع </h3>
+                        <p>عندنا طباعة على المج وبالشكل اللي تختاره وباسعار منافسة جدا</p>
+                    </div>
+                </div>
+             <br>            </div>
+
+                <!-- المشروع الثاني -->
+                <div class="portfolio-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmOrRnnJglguTDRUk5soaE06ygH8a1fAIo7mhxypO1B5kpvlsQo_9JasHT&s=10" alt="مشروع 2">
+                    </div> 
+                  
+                  
+                    <div class="card-content">
+                        <h3>بوكسات هدايا</h3>
+                        <p>عايز تعمل هدية لحد ومحتار ؟ بنعملك بوكس هدايا في كل اللي تحتاجه من اختيارك الشخصي وباسعار ولا في الخيال </p>
+                    </div>
+                </div>
+          <br>
+
+                <!-- المشروع الثالث -->
+                <div class="portfolio-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://media.zid.store/cdn-cgi/image/w=1200,h=630,q=90,fit=pad,background=white/https://media.zid.store/40bfcacc-f435-45a0-a3b9-216f0d553af4/d64ab463-be64-4e47-a3dc-2caf31272779.png" alt="مشروع 3">
+                    </div>
+                    <div class="card-content">
+                        <h3>بوكيهات ورد </h3>
+                        <p>عندي احلى اشكال بوكيهات الورد والشكل اللي تختاره وباسعار مفاجأة</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. قسم التواصل وتحويل الواتساب -->
+    <section  class="contact-section">
+        <div class="container">
+            <div class="contact-box">
+                <h2>عايز تطلب أو عندك استفسار؟</h2>
+                <p>هنكون سعيدين جدا بتواصلك معانا</p>
+                
+                <!-- استبدل الرقم أدناه برقمك الفعلي متبوعاً بكود الدولة بدون علامة + (مثال: 201000000000) -->
+                <a 
+                    <svg 
+                  
+                </a>
+            </div>
+        </div>
+    </section>
+  <section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-box">
+            <h2>تواصل معي مباشرة</h2>
+            <p>يسعدني تواصلك معي عبر منصات التواصل الاجتماعي:</p>
+            
+            <!-- حاوية الأزرار -->
+            <div class="social-buttons">
+                <!-- زر الواتساب -->
+                <a
+                  href="https://wa.me/+201028411327" target="_blank" class="whatsapp-main-btn" style="padding: 12px 25px; font-size: 1rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.342l-.38-.007c-.133 0-.348.048-.53.247-.182.198-.694.678-.694 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.078.38-.058 1.17-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg>
+           whatsapp
+                
+
+                <!-- زر الفيسبوك (استبدل رابط profile بـ رابط حسابك أو صفحتك) -->
+                <a
+                  href="https://www.facebook.com/share/1L1F3EtJGc/" target="_blank" class="facebook-main-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>facebook
+              
+
+                <!-- زر إنستجرام (استبدل رابط instagram بالرابط الخاص بك) -->
+                <a
+                  href="https://instagram.com/memos_tore7?exln=MTBrNnMwODhwODA5aw%3D%3D" target="_blank" class="instagram-main-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.973.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.198-.509.333-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.282.11-.705.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.668 2.668 0 1 1 0 5.335 2.668 2.668 0 0 1 0-5.335z"/></svg>
+            instagram
+                
+
+                  
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- 5. الفوتر -->
+    <footer>
+        <p>  جميع الحقوق محفوظة  &copy;  2026</p>
+      <br>
+      <p>
+        developed by YOUSEF HM
+      </p>
+    </footer>
+
+    <!-- سكريبت التنقل السلس -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
